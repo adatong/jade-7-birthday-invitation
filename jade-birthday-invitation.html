@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌈 Jade's 7th Birthday Party Invitation ⭐</title>
+    
+    <!-- OpenGraph tags for WhatsApp and social sharing -->
+    <meta property="og:title" content="🌈 Jade's 7th Birthday Party - Rainbow Laser Tag! ⭐">
+    <meta property="og:description" content="You're invited to Jade's amazing Rainbow Laser Tag party! Sunday 28th September, 10:05am at Strike Chatswood. RSVP to Ada 0417 106 885">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://i.imgur.com/rainbow-party.jpg">
+    <meta property="og:site_name" content="Jade's Birthday Invitation">
+    
+    <!-- WhatsApp specific -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🌈 Jade's 7th Birthday Party!">
+    <meta name="twitter:description" content="Rainbow Laser Tag Adventure - Sunday 28th September">
+    
+    <!-- Additional meta tags -->
+    <meta name="description" content="Interactive birthday invitation for Jade's 7th birthday Rainbow Laser Tag party">
+    <meta name="theme-color" content="#ff0080">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(45deg, 
+                #ff0080, #ff8c00, #ffd700, #00ff00, 
+                #00ffff, #0080ff, #8000ff, #ff0080);
+            background-size: 400% 400%;
+            animation: rainbowWave 8s ease infinite;
+        }
+
+        @keyframes rainbowWave {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .invitation-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: clamp(20px, 4.5vw, 32px);
+            margin-bottom: 10px;
+            line-height: 1.2;
+            background: linear-gradient(90deg, 
+                #ff0080, #ff8c00, #ffd700, #00ff00, 
+                #00ffff, #0080ff, #8000ff, #ff0080);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowText 3s linear infinite;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes rainbowText {
+            to { background-position: 200% center; }
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #ff6b35;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section {
+            text-align: left;
+            margin: 20px 0;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .info-item {
+            margin: 12px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .info-item .emoji {
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+        }
+
+        .venue-detail, .time-detail {
+            margin-left: 25px;
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .tap-hint {
+            margin-top: 25px;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .sound-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd700, #ffed4b);
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        .sound-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .laser {
+            position: fixed;
+            background: linear-gradient(to bottom, 
+                transparent,
+                rgba(255, 0, 128, 0.8),
+                #ff0080, #ff8c00, #ffd700, #00ff00, 
+                #00ffff, #0080ff, #8000ff,
+                rgba(128, 0, 255, 0.8),
+                transparent);
+            box-shadow: 
+                0 0 10px #ff0080,
+                0 0 20px #ffd700,
+                0 0 30px #00ffff,
+                0 0 40px #ff0080,
+                0 0 60px #ffd700,
+                0 0 80px #00ffff,
+                inset 0 0 10px rgba(255, 255, 255, 0.8);
+            border-radius: 4px;
+            transform-origin: 0 0;
+            animation: laserFade 1s ease-out forwards;
+            z-index: 50;
+            pointer-events: none;
+            filter: brightness(1.5) contrast(1.2);
+        }
+
+        @keyframes laserFade {
+            0% { 
+                opacity: 1; 
+                filter: brightness(2) contrast(1.5);
+                transform: scaleX(1.5);
+            }
+            50% {
+                opacity: 0.8;
+                filter: brightness(1.5) contrast(1.2);
+                transform: scaleX(1);
+            }
+            100% { 
+                opacity: 0;
+                filter: brightness(0.5) contrast(1);
+                transform: scaleX(0.8);
+            }
+        }
+
+        .particle {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 60;
+            animation: particleFly 1.2s ease-out forwards;
+        }
+
+        @keyframes particleFly {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--dx), var(--dy)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .screen-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(255, 215, 0, 0.4));
+            pointer-events: none;
+            z-index: 40;
+            animation: flash 0.3s ease-out forwards;
+        }
+
+        @keyframes flash {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @media (max-width: 480px) {
+            .invitation-card {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 19px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .info-section {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound">🔊</button>
+    
+    <div class="invitation-card">
+        <h1>🌈⭐ Jade's 7th Birthday Party ⭐🌈</h1>
+        <div class="subtitle">Rainbow Laser Tag Adventure!</div>
+        
+        <div class="info-section">
+            <div class="info-item">
+                <span class="emoji">📅</span>
+                <strong>Date:</strong> Sunday 28th September
+            </div>
+            
+            <div class="info-item">
+                <span class="emoji">⏰</span>
+                <strong>Time:</strong> 10:05am - 12pm
+                <div class="time-detail">(Laser tag fun starts at 10:20am!)</div>
+            </div>
+            
+            <div class="info-item">
+                <span class="emoji">🎯</span>
+                <strong>Venue:</strong> Strike Chatswood
+                <div class="venue-detail">L4 Mandarin Centre, Cnr Albert and Victor St, Chatswood</div>
+            </div>
+            
+            <div class="info-item">
+                <span class="emoji">📞</span>
+                <strong>RSVP:</strong> Ada 0417 106 885
+                <div class="venue-detail">Please confirm by 21 September</div>
+            </div>
+        </div>
+        
+        <div class="tap-hint">✨ Tap anywhere for rainbow laser magic! ✨</div>
+    </div>
+
+    <script>
+        // Audio context for sound effects
+        let audioContext;
+        let soundEnabled = true;
+
+        // Initialize audio context on first user interaction
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // Create laser sound effect
+        function playLaserSound() {
+            if (!soundEnabled || !audioContext) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.1);
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.1);
+        }
+
+        // Create sparkle sound effect
+        function playSparkleSound() {
+            if (!soundEnabled || !audioContext) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(1500, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(2500, audioContext.currentTime + 0.3);
+            
+            gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+
+        // Get random position on screen edge
+        function getRandomEdgePosition() {
+            const edge = Math.floor(Math.random() * 4);
+            let x, y;
+            
+            switch(edge) {
+                case 0: // Top
+                    x = Math.random() * window.innerWidth;
+                    y = 0;
+                    break;
+                case 1: // Right
+                    x = window.innerWidth;
+                    y = Math.random() * window.innerHeight;
+                    break;
+                case 2: // Bottom
+                    x = Math.random() * window.innerWidth;
+                    y = window.innerHeight;
+                    break;
+                case 3: // Left
+                    x = 0;
+                    y = Math.random() * window.innerHeight;
+                    break;
+            }
+            
+            return { x, y };
+        }
+
+        // Create laser beam
+        function createLaser(targetX, targetY) {
+            const laser = document.createElement('div');
+            laser.className = 'laser';
+            
+            const start = getRandomEdgePosition();
+            const dx = targetX - start.x;
+            const dy = targetY - start.y;
+            const length = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+            
+            laser.style.left = start.x + 'px';
+            laser.style.top = start.y + 'px';
+            laser.style.width = '10px';
+            laser.style.height = length + 'px';
+            laser.style.transform = `rotate(${angle + 90}deg)`;
+            
+            document.body.appendChild(laser);
+            
+            // Remove laser after animation
+            setTimeout(() => laser.remove(), 1000);
+        }
+
+        // Create particle explosion
+        function createParticles(x, y) {
+            const colors = ['#ff0080', '#ff8c00', '#ffd700', '#00ff00', '#00ffff', '#0080ff', '#8000ff'];
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const angle = (Math.PI * 2 * i) / particleCount;
+                const velocity = 100 + Math.random() * 100;
+                const dx = Math.cos(angle) * velocity;
+                const dy = Math.sin(angle) * velocity;
+                
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+                particle.style.setProperty('--dx', dx + 'px');
+                particle.style.setProperty('--dy', dy + 'px');
+                
+                document.body.appendChild(particle);
+                
+                // Remove particle after animation
+                setTimeout(() => particle.remove(), 1200);
+            }
+        }
+
+        // Create screen flash
+        function createFlash() {
+            const flash = document.createElement('div');
+            flash.className = 'screen-flash';
+            document.body.appendChild(flash);
+            
+            // Remove flash after animation
+            setTimeout(() => flash.remove(), 300);
+        }
+
+        // Main shoot laser function
+        function shootLaser(x, y) {
+            initAudio();
+            
+            // Create 3 laser beams
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    createLaser(x, y);
+                    if (i === 0) playLaserSound();
+                }, i * 50);
+            }
+            
+            // Create particle explosion after lasers
+            setTimeout(() => {
+                createParticles(x, y);
+                createFlash();
+                playSparkleSound();
+            }, 150);
+        }
+
+        // Event listeners
+        document.addEventListener('click', (e) => {
+            // Don't shoot laser when clicking sound toggle
+            if (e.target.id === 'soundToggle') return;
+            shootLaser(e.clientX, e.clientY);
+        });
+
+        document.addEventListener('touchstart', (e) => {
+            // Don't shoot laser when touching sound toggle
+            if (e.target.id === 'soundToggle') return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            shootLaser(touch.clientX, touch.clientY);
+        });
+
+        // Sound toggle
+        document.getElementById('soundToggle').addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
+        });
+    </script>
+</body>
+</html>
