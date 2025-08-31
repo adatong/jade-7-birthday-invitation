@@ -1,1 +1,1 @@
-Birthday party invitation created in claude
+Birthday party invitation
