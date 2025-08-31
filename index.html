@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Jade's Laser Tag Party!">
+  <meta property="og:description" content="You're invited to Jade's Rainbow Laser Tag party! Sunday 28th Sep 10:05am at Strike Chatswood. Interactive invitation inside!">
+  <meta property="og:type" content="website">
+  <title>Jade's Laser Tag Party</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffd1dc, #ffe4b5, #e0bbff, #b5e0ff, #d1ffd6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', 'Comic Neue', cursive;
+    }
+    .card {
+      background: rgba(255,255,255,0.5);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      max-width: 440px;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
+    h1 {
+      font-size: 1.9em;
+      color: #b57edc;
+      margin-bottom: 20px;
+      line-height: 1.4em;
+    }
+    p {
+      font-size: 1.25em;
+      margin: 15px 0;
+      line-height: 1.8em;
+    }
+    .rsvp {
+      font-size: 0.9em;
+      color: #444;
+    }
+    .instructions {
+      font-size: 1em;
+      margin-top: 20px;
+      color: #555;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 10px 22px;
+      background: #e3c9ff;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1.1em;
+      cursor: pointer;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>✨ Jade is turning 7! Join us for a laser tag party to celebrate ✨</h1>
+    <p>📅 Sunday 28th September</p>
+    <p>⏰ 10:05am - 12pm (Laser tag starts 10:20am)</p>
+    <p>📍 Strike Chatswood, L4 Mandarin Centre<br> Cnr Albert & Victor St, Chatswood</p>
+    <p class="rsvp">📲 RSVP Ada 0417 106 885 by 21 Sep</p>
+    <p class="instructions">👉 Tap anywhere on the screen to practise shooting rainbow lasers and get ready for Jade's party!</p>
+    <button class="btn" id="soundToggle">🔊 Sound On</button>
+  </div>
+  <canvas id="laserCanvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('laserCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const pewSound = new (window.AudioContext || window.webkitAudioContext)();
+    function playPew(){
+      const osc = pewSound.createOscillator();
+      const gain = pewSound.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(600, pewSound.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(100, pewSound.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.2, pewSound.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, pewSound.currentTime + 0.2);
+      osc.connect(gain).connect(pewSound.destination);
+      osc.start();
+      osc.stop(pewSound.currentTime + 0.2);
+    }
+
+    let soundEnabled = true;
+    document.getElementById('soundToggle').addEventListener('click',()=>{
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundToggle').textContent = soundEnabled ? '🔊 Sound On' : '🔇 Sound Off';
+    });
+
+    class Laser {
+      constructor(x,y){
+        this.x = canvas.width/2;
+        this.y = canvas.height;
+        this.tx = x;
+        this.ty = y;
+        this.progress = 0;
+      }
+      update(){
+        this.progress += 0.05;
+      }
+      draw(){
+        ctx.strokeStyle = `hsla(${Math.random()*360},70%,80%,0.8)`;
+        ctx.lineWidth = 6;
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = 'white';
+        ctx.beginPath();
+        ctx.moveTo(this.x,this.y);
+        ctx.lineTo(this.x+(this.tx-this.x)*this.progress,this.y+(this.ty-this.y)*this.progress);
+        ctx.stroke();
+      }
+      done(){return this.progress>=1;}
+    }
+
+    class Particle{
+      constructor(x,y){
+        this.x=x;this.y=y;
+        this.angle=Math.random()*2*Math.PI;
+        this.speed=Math.random()*4+2;
+        this.life=60;
+        this.color = Math.random()<0.2 ? 'gold' : `hsla(${Math.random()*360},70%,85%,0.9)`;
+      }
+      update(){
+        this.x+=Math.cos(this.angle)*this.speed;
+        this.y+=Math.sin(this.angle)*this.speed;
+        this.speed*=0.95;
+        this.life--;
+      }
+      draw(){
+        ctx.fillStyle=this.color;
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,4,0,2*Math.PI);
+        ctx.fill();
+      }
+      done(){return this.life<=0;}
+    }
+
+    let lasers=[];
+    let particles=[];
+
+    function shoot(x,y){
+      lasers.push(new Laser(x,y));
+      if(soundEnabled) playPew();
+      for(let i=0;i<25;i++){
+        particles.push(new Particle(x,y));
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      lasers.forEach(l=>{l.update();l.draw();});
+      lasers=lasers.filter(l=>{if(l.done()){for(let i=0;i<30;i++)particles.push(new Particle(l.tx,l.ty));return false;}return true;});
+      particles.forEach(p=>{p.update();p.draw();});
+      particles=particles.filter(p=>!p.done());
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener('resize',()=>{
+      canvas.width=window.innerWidth;
+      canvas.height=window.innerHeight;
+    });
+
+    document.body.addEventListener('click',(e)=>{
+      shoot(e.clientX,e.clientY);
+    });
+  </script>
+</body>
+</html>
